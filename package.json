@@ -1,0 +1,24 @@
+{
+  "name": "ah_guestbook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alansif/ah_guestbook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alansif/ah_guestbook/issues"
+  },
+  "homepage": "https://github.com/alansif/ah_guestbook#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mssql": "^4.0.4"
+  }
+}
