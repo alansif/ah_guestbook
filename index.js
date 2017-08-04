@@ -11,6 +11,11 @@ sql.on('error', err => {
     console.log(err);
 });
 
+const pool = sql.connect(config253, function(err){
+	if (err)
+		console.log(err);
+});
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -22,7 +27,7 @@ app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length,Authorization,Accept,X-Requested-With");
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
     res.header("Content-Type", "application/json;charset=utf-8");
-    if(req.method==="OPTIONS") res.send(200);/*让options请求快速返回*/
+    if(req.method==="OPTIONS") res.sendStatus(200);/*让options请求快速返回*/
     else next();
 });
 
@@ -36,7 +41,6 @@ app.post('/api/v1/guestbook', function(req, res){
     const ctg = req.body.category || '';
     let f = async function(){
         try {
-            let pool = await sql.connect(config253);
             let result = await pool.request()
                 .input('rip', rip)
                 .input('name', name)
