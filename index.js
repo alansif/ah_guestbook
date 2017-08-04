@@ -1,4 +1,4 @@
-const sql = require('mssql');
+﻿const sql = require('mssql');
 
 const config253 = {
     user: 'sa',
@@ -44,7 +44,7 @@ app.post('/api/v1/guestbook', function(req, res){
                 .input('msg', msg)
                 .input('ctg', ctg)
                 .query(sql_leavemsg);
-            res.status(200).json(result);
+            res.status(200).json({status:{code:0},data:result});
         } catch(err) {
             console.log(err);
             res.status(500).json(err);
