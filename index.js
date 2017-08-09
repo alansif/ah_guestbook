@@ -106,6 +106,29 @@ app.post('/api/v1/guestbook/be/:uid/state', function(req, res){
     f();
 });
 
+app.post('/api/v1/guestbook/be/:uid/comment', function(req, res){
+    let uid = req.params.uid || '';
+    let comment = req.body.value || '';
+    if (uid.length === 0 || comment.length === 0) {
+        res.status(400).json({status:{code:400,description:'params error'}});
+	return;
+    }
+    const sql_str = 'update ZZ_WebGuestMessage set comment=@c where uid=@u';
+    let f = async function(){
+	try {
+            let result = await pool.request()
+	        .input('c', comment)
+	        .input('u', uid)
+                .query(sql_str);
+            res.status(200).json({status:{code:0},data:result});
+        } catch(err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
+    };
+    f();
+});
+
 app.use(function(req, res){
     console.log(req.headers);
     console.log(req.body);
